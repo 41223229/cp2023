@@ -142,283 +142,234 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">w6 << <a href='w6.html'>Previous</a> <a href='W12.html'>Next</a> >> W12<br /><h1>w7</h1>
-<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
-#include &lt;gd.h&gt;
+    <div id="tipue_search_content">W15 << <a href='W15.html'>Previous</a> <a href='Brython.html'>Next</a> >> Brython<br /><h1>W16</h1>
+<p>1.</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;gd.h&gt;
+#include &lt;stdio.h&gt;
 #include &lt;math.h&gt;
-
-void draw_japan_flag(gdImagePtr img);
-void draw_white_sun(gdImagePtr img, int center_x, int center_y, int sun_radius, int white, int red );
-
+ 
+#define WIDTH 800
+#define HEIGHT 600
+#define SCALE 100
+ 
+//繪製電阻形狀
+void drawResistor(gdImagePtr im, int x1, int y, int width, int height) {
+    int startX = x1 ;
+    int endX = x1 + width ;
+ 
+    // 第一段直線向前走一段
+    gdImageLine(im, startX, y, startX + width / 4 , y, gdImageColorAllocate(im, 0, 0, 255));
+ 
+    // 向上45度
+    gdImageLine(im, startX + width / 4 , y, startX + width / 4 + height / 2 , y - height / 2, gdImageColorAllocate(im, 0, 0, 255));
+ 
+    // 向下90度
+    gdImageLine(im, startX + width / 4 + height / 2, y - height / 2 , startX + width / 4 + height / 2 + height , y + height / 2, gdImageColorAllocate(im, 0, 0, 255));
+ 
+    // 向上90度
+    gdImageLine(im, startX + width / 4 + height / 2 + height, y + height / 2, startX + width / 4 + height / 2 + 2 * height, y - height / 2, gdImageColorAllocate(im, 0, 0, 255));
+ 
+    // 向下90度
+    gdImageLine(im, startX + width / 4 + height / 2 + 2 * height , y - height / 2, startX + width / 4 + height / 2 + 3 * height , y + height / 2, gdImageColorAllocate(im, 0, 0, 255));
+ 
+    // 向上90度
+    gdImageLine(im, startX + width / 4 + height / 2 + 3 * height, y + height / 2 , startX + width / 4 + height / 2 + 4 * height, y - height / 2, gdImageColorAllocate(im, 0, 0, 255));
+ 
+    // 向下90度
+    gdImageLine(im, startX + width / 4 + height / 2 + 4 * height, y - height / 2, startX + width / 4 + height / 2 + 5 * height, y + height / 2, gdImageColorAllocate(im, 0, 0, 255));
+ 
+  // 向上45度
+    gdImageLine(im, startX + width / 4 + height / 2 + 5 * height, y + height / 2, startX + width / 4 + height / 2 + 5 * height + height / 2, y, gdImageColorAllocate(im, 0, 0, 255));
+ 
+  gdImageLine(im, startX + width / 4 + height / 2 + 5 * height + height / 2, y, startX + width / 4 + height / 2 + 5 * height + height / 2 +5 , y, gdImageColorAllocate(im, 0, 0, 255));
+ 
+ 
+  {
+    int startX = 100;
+  gdImageColorAllocate(im, 0, 0, 255);
+ 
+ 
+    // 第一段直線向前走一段
+    gdImageLine(im, startX, y, startX + width / 4 , y, gdImageColorAllocate(im, 0, 0, 255));
+ 
+    // 向上45度
+    gdImageLine(im, startX + width / 4 , y, startX + width / 4 + height / 2 , y - height / 2, gdImageColorAllocate(im, 0, 0, 255));
+ 
+    // 向下90度
+    gdImageLine(im, startX + width / 4 + height / 2, y - height / 2 , startX + width / 4 + height / 2 + height , y + height / 2, gdImageColorAllocate(im, 0, 0, 255));
+ 
+    // 向上90度
+    gdImageLine(im, startX + width / 4 + height / 2 + height, y + height / 2, startX + width / 4 + height / 2 + 2 * height, y - height / 2, gdImageColorAllocate(im, 0, 0, 255));
+ 
+    // 向下90度
+    gdImageLine(im, startX + width / 4 + height / 2 + 2 * height , y - height / 2, startX + width / 4 + height / 2 + 3 * height , y + height / 2, gdImageColorAllocate(im, 0, 0, 255));
+ 
+    // 向上45度
+      gdImageLine(im, startX + width / 4 + height / 2 + 3 * height, y + height / 2, startX + width / 4 + height / 2 + 3 * height + height / 2, y, gdImageColorAllocate(im, 0, 0, 255));
+ 
+    gdImageLine(im, startX + width / 4 + height / 2 + 3 * height + height / 2, y, startX + width / 4 + height / 2 + 3 * height + height / 2 +5 , y, gdImageColorAllocate(im, 0, 0, 255));
+ }
+ 
+  {
+    int startX = 585;
+  gdImageColorAllocate(im, 0, 0, 255);
+ 
+ 
+    // 第一段直線向前走一段
+    gdImageLine(im, startX, y, startX + width / 4 , y, gdImageColorAllocate(im, 0, 0, 255));
+ 
+    // 向上45度
+    gdImageLine(im, startX + width / 4 , y, startX + width / 4 + height / 2 , y - height / 2, gdImageColorAllocate(im, 0, 0, 255));
+ 
+    // 向下90度
+    gdImageLine(im, startX + width / 4 + height / 2, y - height / 2 , startX + width / 4 + height / 2 + height , y + height / 2, gdImageColorAllocate(im, 0, 0, 255));
+ 
+    // 向上90度
+    gdImageLine(im, startX + width / 4 + height / 2 + height, y + height / 2, startX + width / 4 + height / 2 + 2 * height, y - height / 2, gdImageColorAllocate(im, 0, 0, 255));
+    // 向下90度
+    gdImageLine(im, startX + width / 4 + height / 2 + 2 * height , y - height / 2, startX + width / 4 + height / 2 + 3 * height , y + height / 2, gdImageColorAllocate(im, 0, 0, 255));
+ 
+    // 向上45度
+      gdImageLine(im, startX + width / 4 + height / 2 + 3 * height, y + height / 2, startX + width / 4 + height / 2 + 3 * height + height / 2, y, gdImageColorAllocate(im, 0, 0, 255));
+ 
+    gdImageLine(im, startX + width / 4 + height / 2 + 3 * height + height / 2, y, startX + width / 4 + height / 2 + 3 * height + height / 2 +5 , y, gdImageColorAllocate(im, 0, 0, 255));
+ 
+    gdImageLine(im, 100, y +20, 700, y +20, gdImageColorAllocate(im, 0, 255, 0));
+ 
+}
+}
+ 
 int main() {
-    // width 3: height 2
-    int width = 1200;
-    int height = 2 * width / 3;
-
-    gdImagePtr img = gdImageCreateTrueColor(width, height);
-    gdImageAlphaBlending(img, 0);
-
-    draw_japan_flag(img);
-
-    FILE *outputFile = fopen("./../images/japan_flag.png", "wb");
+    gdImagePtr im;
+    FILE *outputFile;
+ 
+    // 創建圖像物件
+    im = gdImageCreateTrueColor(WIDTH, HEIGHT);
+    if (im == NULL) {
+        fprintf(stderr, "Error creating GD image.\n");
+        return 1;
+    }
+ 
+    outputFile = fopen("1.png", "wb");
     if (outputFile == NULL) {
         fprintf(stderr, "Error opening the output file.\n");
         return 1;
     }
-    gdImagePngEx(img, outputFile, 9);
-    fclose(outputFile);
-    gdImageDestroy(img);
-    return 0;
-}
-
-void draw_japan_flag(gdImagePtr img) {
-    int width = gdImageSX(img);
-    int height = gdImageSY(img);
-    int red, white ;
-    int center_x =  0.5 * width;
-    int center_y =  0.5 * height;
-    int sun_radius = 145 ;
-
-    // Colors for the flag
-    red = gdImageColorAllocate(img, 242, 0, 0); // Red color
-    white = gdImageColorAllocate(img, 255, 255, 255); // White stripes
-
-
-    // 繪製白色矩形區域
-    gdImageFilledRectangle(img, 0, 0, width, height, white);
-
-
-    // 繪製太陽內部
-    gdImageFilledEllipse(img, center_x, center_y, sun_radius * 3, sun_radius * 3, red);
-}
-</pre>
-<p><img alt="" height="267" src="./../images/japan_flag.png" width="400"/></p>
-<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
-#include &lt;gd.h&gt;
-#include &lt;math.h&gt;
-
-void draw_chinese_flag(gdImagePtr img);
-
-int main() {
-    int width = 300; // 國旗寬度
-    int height = 200; // 國旗高度
-
-    gdImagePtr im = gdImageCreateTrueColor(width, height);
-    gdImageAlphaBlending(im, 0);
-
-    draw_chinese_flag(im);
-
-    FILE *outputFile = fopen("./../images/proc_flag.png", "wb");
-    if (outputFile == NULL) {
-        fprintf(stderr, "打开输出文件时出错。\n");
-        return 1;
-    }
-
-    gdImagePngEx(im, outputFile, 9);
+ 
+    //配置顏色
+    int black, white, red, blue, green;
+ 
+    black = gdImageColorAllocate(im, 0, 0, 0);
+    white = gdImageColorAllocate(im, 255, 255, 255);
+    red = gdImageColorAllocate(im, 255, 0, 0);
+    blue = gdImageColorAllocate(im, 0, 0, 255);
+green = gdImageColorAllocate(im, 0, 255, 0);
+    gdImageFilledRectangle(im, 0, 0, WIDTH - 1, HEIGHT - 1, white);
+ 
+    // 繪製牆面
+    gdImageLine(im, SCALE, SCALE, SCALE, HEIGHT - SCALE, black);
+    gdImageLine(im, WIDTH - SCALE, SCALE, WIDTH - SCALE, HEIGHT - SCALE, black);
+ 
+   // 繪製彈簧(電阻)
+    drawResistor(im, WIDTH / 3 + SCALE / 2, HEIGHT / 2, SCALE / 2, SCALE / 4);
+ 
+    // 繪製質量（方形）
+    gdImageFilledRectangle(im, WIDTH / 3 - SCALE / 2, HEIGHT / 2 - SCALE / 2, WIDTH / 3 + SCALE / 2, HEIGHT / 2 + SCALE / 2, red);
+    gdImageFilledRectangle(im, WIDTH * 2 / 3 - SCALE / 2, HEIGHT / 2 - SCALE / 2, WIDTH * 2 / 3 + SCALE / 2, HEIGHT / 2 + SCALE / 2, red);
+ 
+  gdImageFilledRectangle(im, 100, HEIGHT +300, 700, HEIGHT /2 +49 , black);
+ 
+ 
+    //生成圖片
+    gdImagePng(im, outputFile);
     fclose(outputFile);
     gdImageDestroy(im);
-
+ 
     return 0;
-}
-
-// 声明 draw_star 函数
-void draw_star(gdImagePtr img, int x, int y, int size, int color, double rotation_angle);
-
-void draw_chinese_flag(gdImagePtr img) {
-    int width = gdImageSX(img);
-    int height = gdImageSY(img);
-    int red, yellow;
-
-    // 國旗顏色
-    red = gdImageColorAllocate(img, 255, 0, 0); // 紅色背景
-    yellow = gdImageColorAllocate(img, 255, 255, 0); // 黃色星星
-
-    // 畫紅色背景
-    gdImageFilledRectangle(img, 0, 0, width, height, red);
-
-    // 設置星星的大小和位置
-    int star_size = (int)(0.28 * height);
-    int star_x = (int)(0.165 * width);
-    int star_y = (int)(0.265 * height);
-
-    // 畫大星星
-    draw_star(img, star_x, star_y, star_size, yellow, 11.0);
-
-    // 繪製小星星，位置根據實際國旗比例計算
-    double radius = 0.15 * height;
-    double angle = 360 / 7 * M_PI / 179.0;
-    double rotation = -M_PI / 7.5;
-    int cx = (int)(0.32 * width);
-    int cy = (int)(0.27 * height);
-
-    for (int i = -1; i &lt; 3; i++) {
-        int x = (int)(cx + radius * cos(i * angle + rotation));
-        int y = (int)(cy + radius * sin(i * angle + rotation));
-        draw_star(img, x, y, 19, yellow, M_PI / 5.0);
-    }
-}
-
-void draw_star(gdImagePtr img, int x, int y, int size, int color, double rotation_angle) {
-    gdPoint points[10];
-
-    // 计算星形的五个外点和五个内点
-    double outer_radius = size / 2;
-    double inner_radius = size / 6;
-    double angle = M_PI / 5.0;
-
-    for (int i = 0; i &lt; 10; i++) {
-        double radius = (i % 2 == 0) ? outer_radius : inner_radius;
-        double theta = rotation_angle + i * angle;
-        points[i].x = x + radius * cos(theta);
-        points[i].y = y + radius * sin(theta);
-    }
-
-    // 使用 gdImageFilledPolygon 绘制星形
-    gdImageFilledPolygon(img, points, 10, color);
-}
-</pre>
-<p><img alt="" height="267" src="./../images/proc_flag.png" width="400"/></p>
-<p></p>
+}</pre>
+<p><img alt="" height="200" src="./../images/1.png" width="267"/></p>
+<p>2.</p>
 <pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
-#include &lt;gd.h&gt;
 #include &lt;math.h&gt;
 
-void draw_uk_flag(gdImagePtr img);
-void fillTriangle(gdImagePtr img, int x1, int y1, int x2, int y2, int x3, int y3, int color);
+#define TIME_STEP 0.01 // 時間步長
+#define SIMULATION_TIME 10.0 // 模擬時間
+
+// 物體參數
+#define m1 2.0
+#define m2 3.0
+#define k1 0.5
+#define k2 1.0
+#define k3 1.5
+#define c1 0.25
+#define c2 0.33
+#define c3 0.5
+#define X1_initial 1.0
+#define X2_initial -0.5
+#define V0 0.0
+
+// 計算阻尼力
+double dampingForce(double c, double v) {
+    return -c * v;
+}
+
+// 模擬物體運動
+void simulateMotion() {
+  double X1 = X1_initial;
+  double X2 = X2_initial;
+  double V1 = V0;
+  double V2 = V0;
+
+  FILE *fp;
+  fp = fopen("motion_data.txt", "w");
+
+  for (double t = 0; t &lt;= SIMULATION_TIME; t += TIME_STEP) {
+  double F1 = -k1 * (X1 - 0) - c1 * (V1 - 0); // 第一個物體受到的合力
+  double F2 = -k2 * (X2 - X1) - c2 * (V2 - V1); // 第二個物體受到的合力
+  double F3 = -k3 * (X2 - 0) - c3 * (V2 - 0); // 第二個物體受到的合力
+
+  double a1 = F1 / m1; // 第一個物體的加速度
+  double a2 = F2 / m2; // 第二個物體的加速度
+
+// 更新速度和位置
+   V1 += a1 * TIME_STEP;
+   V2 += a2 * TIME_STEP;
+
+  X1 += V1 * TIME_STEP;
+  X2 += V2 * TIME_STEP;
+
+// 在文件寫入時紀錄 m1 和 m2 的位置和速度數據
+  fprintf(fp, "%lf %lf %lf %lf %lf\n", t, X1, X2, V1, V2);
+    }
+
+
+  fclose(fp);
+}
 
 int main() {
-// 设置国旗的宽和高
-int width = 1200;
-int height = width / 2;
-
-// 创建图像
-gdImagePtr img = gdImageCreateTrueColor(width, height);
-gdImageAlphaBlending(img, 0);
-
-// 绘制英国国旗
-draw_uk_flag(img);
-
-// 将图像保存到文件
-FILE *outputFile = fopen("./../images/uk_flag.png", "wb");
-if (outputFile == NULL) {
-fprintf(stderr, "打开输出文件时发生错误。\n");
-return 1;
+    simulateMotion();
+    return 0;
 }
-gdImagePngEx(img, outputFile, 9);
-fclose(outputFile);
-gdImageDestroy(img);
-return 0;
-}
+</pre>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
 
-
-
-void draw_uk_flag(gdImagePtr img) {
-int width = gdImageSX(img);
-int height = gdImageSY(img);
-
-int red, white, blue;
-red = gdImageColorAllocate(img, 204, 0, 0); // 红色
-white = gdImageColorAllocate(img, 255, 255, 255); // 白色
-blue = gdImageColorAllocate(img, 0, 0, 153); // 蓝色
-
-gdImageFilledRectangle(img, 0, 0, width, height, blue);
-
-
-int x1, y1, x2, y2, x3, y3;
-{
-int line_thickness = 100;
-gdImageSetThickness(img, line_thickness);
-
-int x1, y1, x2, y2, x3, y3;
-
-// 绘制白色斜线
-x1 = 0;
-y1 = 600;
-x2 = 1200;
-y2 = 0;
-gdImageLine(img, x1, y1, x2, y2, white);
-
-x1 = 0;
-y1 = 0;
-x2 = 1200;
-y2 = 600;
-gdImageLine(img, x1, y1, x2, y2, white);
-}
-{
-int line_thickness = 33;
-gdImageSetThickness(img, line_thickness);
-
-
-// 绘制红色斜线
-x1 = 566;
-y1 = 300;
-x2 = 1166;
-y2 = 0;
-gdImageLine(img, x1, y1, x2, y2, red);
-
-x1 = 1233;
-y1 = 600;
-x2 = 633;
-y2 = 300;
-gdImageLine(img, x1, y1, x2, y2, red);
-
-x1 = 566;
-y1 = 300;
-x2 = -33;
-y2 = 0;
-gdImageLine(img, x1, y1, x2, y2, red);
-
-x1 = 600;
-y1 = 316.5;
-x2 = 0;
-y2 = 616.5;
-gdImageLine(img, x1, y1, x2, y2, red);
-}
-{
-int line_thickness = 33;
-gdImageSetThickness(img, line_thickness);
-
-int x1, y1, x2, y2, x3, y3;
-
-// 绘制 斜线
-x1 = 0;
-y1 = 600;
-x2 = 1200;
-y2 = 0;
-gdImageLine(img, x1, y1, x2, y2, red );
-
-
-x1 = 1200;
-y1 = 16.5;
-x2 = 600;
-y2 = 316.5;
-gdImageLine(img, x1, y1, x2, y2, white);
-
-
-x1 = 0;
-y1 = 583.5;
-x2 = 600;
-y2 = 283.5;
-gdImageLine(img, x1, y1, x2, y2, white);
-
-
-}
-
-// 绘制白色十字
-int cross_width = width / 32;
-int cross_arm_width = width / 32;
-int center_x = width / 2;
-int center_y = height / 2;
-
-gdImageFilledRectangle(img, center_x + 2.7 * cross_width, 0, center_x - 2.7 * cross_width, height, white);
-gdImageFilledRectangle(img, 0, center_y + 2.7 * cross_arm_width, width, center_y - 2.7 * cross_arm_width, white);
-
-// 绘制红色十字
-gdImageFilledRectangle(img, center_x + 1.5 * cross_width, 0, center_x - 1.5 * cross_width, height, red);
-gdImageFilledRectangle(img, 0, center_y + 1.5 * cross_arm_width, width, center_y - 1.5 * cross_arm_width, red);
+int main() {
+    FILE *gnuplotPipe = popen("gnuplot", "w");
+    if (gnuplotPipe) {
+        fprintf(gnuplotPipe, "set terminal png\n");
+        fprintf(gnuplotPipe, "set output 'motion_plot.png'\n");
+        fprintf(gnuplotPipe, "set xlabel 'Time'\n");
+        fprintf(gnuplotPipe, "set ylabel 'Position / Velocity'\n");
+        fprintf(gnuplotPipe, "plot 'motion_data.txt' using 1:2 with lines title 'm1 position', 'motion_data.txt' using 1:3 with lines title 'm2 position', 'motion_data.txt' using 1:4 with lines title 'm1 velocity', 'motion_data.txt' using 1:5 with lines title 'm2 velocity'\n");
+        fprintf(gnuplotPipe, "exit\n");
+        fflush(gnuplotPipe);
+        pclose(gnuplotPipe);
+    } else {
+        printf("Error opening pipe to Gnuplot.\n");
+    }
+    return 0;
 }</pre>
-<p><img alt="" height="200" src="./../images/uk_flag.png" width="400"/></p>
-<br />w6 << <a href='w6.html'>Previous</a> <a href='W12.html'>Next</a> >> W12</div>
+<p><img alt="" height="200" src="./../images/motion_plot.png" width="267"/><br/><br/><br/></p><br />W15 << <a href='W15.html'>Previous</a> <a href='Brython.html'>Next</a> >> Brython</div>
         
     <!-- footer -->
       <div class="container">

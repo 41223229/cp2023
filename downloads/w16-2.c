@@ -1,67 +1,61 @@
 #include <stdio.h>
+#include <math.h>
 
-// System parameters
-#define M1 2.0
-#define M2 3.0
-#define K1 0.5
-#define K2 1.0
-#define K3 15.0
-#define C1 0.25
-#define C2 0.33
-#define C3 0.5
+#define TIME_STEP 0.01 // 時間步長
+#define SIMULATION_TIME 10.0 // 模擬時間
 
-// Function to calculate the derivative of the state
-void calculate_derivative(double t, double state[4], double derivative[4]) {
-    derivative[0] = state[2];  // dx1/dt = v1
-    derivative[1] = state[3];  // dx2/dt = v2
+// 物體參數
+#define m1 2.0
+#define m2 3.0
+#define k1 0.5
+#define k2 1.0
+#define k3 1.5
+#define c1 0.25
+#define c2 0.33
+#define c3 0.5
+#define X1_initial 1.0
+#define X2_initial -0.5
+#define V0 0.0
 
-    double delta_x = state[0] - state[1];
-
-    // dv1/dt
-    derivative[2] = -(K1 * state[0] + K2 * delta_x) / M1;
-
-    // dv2/dt
-    derivative[3] = -(K3 * state[1] - K2 * delta_x) / M2;
+// 計算阻尼力
+double dampingForce(double c, double v) {
+    return -c * v;
 }
 
-// Euler's Method for solving the system
-void euler_method(double t_initial, double t_final, double dt, double initial_conditions[4]) {
-    FILE *output_file;
-    output_file = fopen("trajectory_data.txt", "w");
+// 模擬物體運動
+void simulateMotion() {
+  double X1 = X1_initial;
+  double X2 = X2_initial;
+  double V1 = V0;
+  double V2 = V0;
 
-    double t = t_initial;
-    double state[4];
-    for (int i = 0; i < 4; ++i) {
-        state[i] = initial_conditions[i];
+  FILE *fp;
+  fp = fopen("motion_data.txt", "w");
+
+  for (double t = 0; t <= SIMULATION_TIME; t += TIME_STEP) {
+  double F1 = -k1 * (X1 - 0) - c1 * (V1 - 0); // 第一個物體受到的合力
+  double F2 = -k2 * (X2 - X1) - c2 * (V2 - V1); // 第二個物體受到的合力
+  double F3 = -k3 * (X2 - 0) - c3 * (V2 - 0); // 第二個物體受到的合力
+
+  double a1 = F1 / m1; // 第一個物體的加速度
+  double a2 = F2 / m2; // 第二個物體的加速度
+
+// 更新速度和位置
+   V1 += a1 * TIME_STEP;
+   V2 += a2 * TIME_STEP;
+
+  X1 += V1 * TIME_STEP;
+  X2 += V2 * TIME_STEP;
+
+// 在文件寫入時紀錄 m1 和 m2 的位置和速度數據
+  fprintf(fp, "%lf %lf %lf %lf %lf\n", t, X1, X2, V1, V2);
     }
 
-    while (t <= t_final) {
-        fprintf(output_file, "%f %f %f %f %f\n", t, state[0], state[1], state[2], state[3]);
 
-        double derivative[4];
-        calculate_derivative(t, state, derivative);
-
-        for (int i = 0; i < 4; ++i) {
-            state[i] += derivative[i] * dt;
-        }
-
-        t += dt;
-    }
-
-    fclose(output_file);
+  fclose(fp);
 }
 
 int main() {
-    // Define the initial conditions
-    double initial_conditions[4] = {1.0, -0.5, 0.0, 0.0};  // x1, x2, v1, v2
-
-    // Time parameters
-    double t_initial = 0.0;
-    double t_final = 10.0;
-    double dt = 0.01;
-
-    // Solve the system using Euler's Method
-    euler_method(t_initial, t_final, dt, initial_conditions);
-
+    simulateMotion();
     return 0;
 }
